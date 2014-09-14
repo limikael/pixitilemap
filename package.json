@@ -1,0 +1,31 @@
+{
+  "name": "PixiTileMap",
+  "version": "0.0.1",
+  "description": "Simple and independent tile map engine for pixi.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "pixi.js": "^1.6.1",
+    "grunt-cli": "^0.1.13"
+  },
+  "devDependencies": {
+    "browserify": "^5.11.2",
+    "qsub": "0.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/limikael/PixiTileMap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/limikael/PixiTileMap/issues"
+  },
+  "homepage": "https://github.com/limikael/PixiTileMap"
+}
