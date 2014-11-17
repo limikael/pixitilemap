@@ -1,5 +1,5 @@
 {
-  "name": "PixiTileMap",
+  "name": "pixitilemap",
   "version": "0.0.1",
   "description": "Simple and independent tile map engine for pixi.js",
   "main": "index.js",
@@ -7,16 +7,16 @@
     "test": "test"
   },
   "dependencies": {
+    "yaed": "^1.0.1",
+  },
+  "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "inherits": "^2.0.1",
-    "yaed": "^1.0.1"
-  },
-  "devDependencies": {
     "browserify": "^5.11.2",
     "pixiapp": "0.0.6",
     "qsub": "0.0.3",
-    "pixi.js": "^2.1.1",
+    "pixi.js": "^2.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
