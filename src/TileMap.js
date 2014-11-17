@@ -1,8 +1,7 @@
 "use strict";
 
-var PIXI=require("pixi.js");
-var FunctionUtil=require("./FunctionUtil");
-var TileMapUtil=require("./TileMapUtil");
+var PIXI = require("pixi.js");
+var inherits = require("inherits");
 
 /**
  * Tile map.
@@ -10,32 +9,32 @@ var TileMapUtil=require("./TileMapUtil");
  * @constructor
  */
 function TileMap(sheet, gridWidth, gridHeight) {
-	this.sheet=TileMapUtil.fixTileTexture(sheet,gridWidth,gridHeight);
-	this.gridWidth=gridWidth;
-	this.gridHeight=gridHeight;
-
 	PIXI.DisplayObjectContainer.call(this);
 
-	this.sprites=[];
-	this.tokenMap={};
+	this.sheet = sheet;
+	this.gridWidth = gridWidth;
+	this.gridHeight = gridHeight;
+
+	this.sprites = [];
+	this.tokenMap = {};
 }
 
-FunctionUtil.extend(TileMap,PIXI.DisplayObjectContainer);
+inherits(TileMap, PIXI.DisplayObjectContainer);
 
 /**
  * Set tile tokens.
  * @method setTileTokens
  */
-TileMap.prototype.setTileTokens=function(tokenRows) {
-	this.tokenMap={};
+TileMap.prototype.setTileTokens = function(tokenRows) {
+	this.tokenMap = {};
 
-	for (var rowIndex=0; rowIndex<tokenRows.length; rowIndex++) {
-		var row=tokenRows[rowIndex];
+	for (var rowIndex = 0; rowIndex < tokenRows.length; rowIndex++) {
+		var row = tokenRows[rowIndex];
 
-		for (var colIndex=0; colIndex<row.length; colIndex++) {
-			var token=row.charAt(colIndex);
+		for (var colIndex = 0; colIndex < row.length; colIndex++) {
+			var token = row.charAt(colIndex);
 
-			this.tokenMap[token]={
+			this.tokenMap[token] = {
 				row: rowIndex,
 				col: colIndex
 			};
@@ -47,23 +46,23 @@ TileMap.prototype.setTileTokens=function(tokenRows) {
  * Create sprite for token.
  * @method createSpriteForToken
  */
-TileMap.prototype.createSpriteForToken=function(token) {
+TileMap.prototype.createSpriteForToken = function(token) {
 	if (!this.tokenMap.hasOwnProperty(token))
-		throw new Error("Unknown token: "+token);
+		throw new Error("Unknown token: " + token);
 
-	var o=this.tokenMap[token];
+	var o = this.tokenMap[token];
 
-	var t=new PIXI.Texture(this.sheet);
-	t.setFrame(new PIXI.Rectangle(
-		1+o.col*(this.gridWidth+2),
-		1+o.row*(this.gridHeight+2),
-		this.gridWidth,
-		this.gridHeight));
+	var frame = new PIXI.Rectangle(
+		o.col * this.gridWidth + .5,
+		o.row * this.gridHeight + .5,
+		this.gridWidth - 1,
+		this.gridHeight - 1);
 
-	var s=new PIXI.Sprite(t);
+	var t = new PIXI.Texture(this.sheet, frame);
+	var s = new PIXI.Sprite(t);
 
-	s.width=this.gridWidth;
-	s.height=this.gridHeight;
+	s.width = this.gridWidth;
+	s.height = this.gridHeight;
 
 	return s;
 }
@@ -72,25 +71,26 @@ TileMap.prototype.createSpriteForToken=function(token) {
  * Set map.
  * @method setMap
  */
-TileMap.prototype.setMap=function(map) {
-	for (var i=0; i<this.sprites.length; i++)
+TileMap.prototype.setMap = function(map) {
+	for (var i = 0; i < this.sprites.length; i++)
 		this.removeChild(this.sprites[i]);
 
-	this.sprites=[];
+	this.sprites = [];
 
-	for (var rowIndex=0; rowIndex<map.length; rowIndex++) {
-		var row=map[rowIndex];
+	for (var rowIndex = 0; rowIndex < map.length; rowIndex++) {
+		var row = map[rowIndex];
 
-		for (var colIndex=0; colIndex<row.length; colIndex++) {
-			var token=row.charAt(colIndex);
-			var s=this.createSpriteForToken(token);
+		for (var colIndex = 0; colIndex < row.length; colIndex++) {
+			var token = row.charAt(colIndex);
 
-			s.position.x=colIndex*this.gridWidth;
-			s.position.y=rowIndex*this.gridHeight;
+			var s = this.createSpriteForToken(token);
+
+			s.position.x = colIndex * this.gridWidth;
+			s.position.y = rowIndex * this.gridHeight;
 
 			this.addChild(s);
 		}
 	}
 }
 
-module.exports=TileMap;
+module.exports = TileMap;

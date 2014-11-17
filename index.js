@@ -1,1 +1,1 @@
-module.exports=require("./src/TileMap");
+module.exports = require("./src/TileMap");

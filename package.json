@@ -8,12 +8,15 @@
   },
   "dependencies": {
     "grunt": "^0.4.5",
-    "pixi.js": "^1.6.1",
-    "grunt-cli": "^0.1.13"
+    "grunt-cli": "^0.1.13",
+    "inherits": "^2.0.1",
+    "yaed": "^1.0.1"
   },
   "devDependencies": {
     "browserify": "^5.11.2",
-    "qsub": "0.0.3"
+    "pixiapp": "0.0.6",
+    "qsub": "0.0.3",
+    "pixi.js": "^2.1.1",
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/limikael/PixiTileMap/issues"
   },
-  "homepage": "https://github.com/limikael/PixiTileMap"
+  "homepage": "https://github.com/limikael/PixiTileMap",
+  "peerDependencies": {
+    "pixi.js": "*"
+  }
 }
